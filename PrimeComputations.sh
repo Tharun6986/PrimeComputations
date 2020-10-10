@@ -23,7 +23,7 @@ do
         fi
         ((i++))
 done
-RevNum ${array[@]}
+UnitsPlace ${array[@]}
 }
 
 function RevNum(){
@@ -35,8 +35,21 @@ do
 done
 }
 
-##First 100 primes in Reverse Order
+function UnitsPlace( ){
+variable=0
+for values in ${array[@]}
+do
+	variable=$(( $values%10 ))
 
+        if [ $variable -eq 1 ]
+        then
+        	echo $values
+        fi
+done
+
+}
+
+##First 100 primes in Reverse Order
 RevOrder(){
 read -p "enter limit: " limit
 echo "first 100 primes in reverse order:"
@@ -49,4 +62,11 @@ read -p "enter limit: " limit
 echo "first 50 alternate primes in Reverse Order are: "
 PrimeGenerator $((limit))
 }
-AlternatePrimes
+
+##First 100 primes having 1 on its units place are
+UnitsPlaceHaving1(){
+read -p "enter limit: " limit
+echo "First 100 primes having units place 1 are: "
+PrimeGenerator $((limit))
+}
+UnitsPlaceHaving1
