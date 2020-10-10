@@ -31,6 +31,7 @@ for (( rev=${#array[@]}; rev>=0; rev-- ))
 do
 
         echo "${array[rev]}"
+	((rev--))
 done
 }
 
@@ -41,7 +42,11 @@ read -p "enter limit: " limit
 echo "first 100 primes in reverse order:"
 PrimeGenerator $((limit))
 }
-RevOrder
 
-
-
+##First 50 Alternate Primes in Reverse order are
+AlternatePrimes(){
+read -p "enter limit: " limit
+echo "first 50 alternate primes in Reverse Order are: "
+PrimeGenerator $((limit))
+}
+AlternatePrimes
