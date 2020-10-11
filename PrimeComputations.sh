@@ -2,10 +2,8 @@
 echo "Welcome to Prime Computations code"
 
 function PrimeGenerator(){
-count=1
-i=2
 
-for (( i=2; i<=$(($1+1)); i++ ))
+for(( i=700; i<=900; i++ ))
 do
 flag=0
 	for (( j=2; j<$i; j++ ))
@@ -18,14 +16,13 @@ flag=0
 
 if [ $flag -eq 0 ]
 then
-	echo $i
 	array[$count]=$i
-	count=$(($count+1))
+	((count++))
 
 fi
 
 done
-PrimePalindrome ${array[@]}
+RevNum ${array[@]}
 }
 
 function RevNum(){
@@ -33,7 +30,6 @@ for (( rev=${#array[@]}; rev>=0; rev-- ))
 do
 
         echo "${array[rev]}"
-	((rev--))
 done
 }
 
@@ -80,4 +76,11 @@ read -p "enter limit: " limit
 echo "Prime numbers between 1 to 200 are: "
 PrimeGenerator $((limit))
 }
-PalindromicPrimes
+
+##Prime numbers in reverse order in between 700 to 900
+PrimeInRange(){
+echo "prime numbers from 700 to 900 in reverse order are: "
+PrimeGenerator
+}
+PrimeInRange
+
