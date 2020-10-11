@@ -5,25 +5,27 @@ function PrimeGenerator(){
 count=1
 i=2
 
-while [ $count -le $limit ]
+for (( i=2; i<=$(($1+1)); i++ ))
 do
-        flag=0
-        for (( j=2; j<=$(($i/2)); j++ ))
-        do
-                if [ $(($i%$j)) -eq 0 ]
-                then
-                        flag=1
-                        break
-                fi
-        done
-        if [ $flag -eq 0 ]
-        then
-                array[count]=$i
-                ((count++))
-        fi
-        ((i++))
+flag=0
+	for (( j=2; j<$i; j++ ))
+	do
+		if [ $(($i%$j)) -eq 0 ]
+		then
+			flag=1
+		fi
+	done
+
+if [ $flag -eq 0 ]
+then
+	echo $i
+	array[$count]=$i
+	count=$(($count+1))
+
+fi
+
 done
-RevNum ${array[@]}
+PrimePalindrome ${array[@]}
 }
 
 function RevNum(){
@@ -34,6 +36,28 @@ do
 	((rev--))
 done
 }
+
+function PrimePalindrome(){
+for (( i=10; i<${#array[@]}; i++ ))
+do
+number=${array[$i]}
+reversenumber=0
+
+while [ $number -ne 0 ]
+do
+        remainder=$(( $number%10 ))
+        reversenumber=$(( ($reversenumber*10)+$remainder ))
+        number=$(( $number/10 ))
+done
+
+if [ $reversenumber -eq ${array[i]} ]
+then
+	echo "palindrome number:" $reversenumber
+	palindrome[$i]=$reversenumber
+fi
+done
+}
+
 
 ##First 100 primes in Reverse Order
 
@@ -49,4 +73,11 @@ read -p "enter limit: " limit
 echo "first 50 alternate primes in Reverse Order are: "
 PrimeGenerator $((limit))
 }
-AlternatePrimes
+
+##palindromic prime numbers between 1 to 200
+PalindromicPrimes(){
+read -p "enter limit: " limit
+echo "Prime numbers between 1 to 200 are: "
+PrimeGenerator $((limit))
+}
+PalindromicPrimes
