@@ -18,7 +18,6 @@ flag=0
 
 if [ $flag -eq 0 ]
 then
-	echo $i
 	array[$count]=$i
 	count=$(($count+1))
 
@@ -77,7 +76,6 @@ PrimeGenerator $((limit))
 ##palindromic prime numbers between 1 to 200
 PalindromicPrimes(){
 read -p "enter limit: " limit
-echo "Prime numbers between 1 to 200 are: "
 PrimeGenerator $((limit))
 }
 PalindromicPrimes
